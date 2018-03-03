@@ -94,7 +94,7 @@ def get_roam_graphs(graph, boss, excecutions):
     return roam1, roam2, roam3, roam4
 
 
-def add_metric_plot(roams, boss, filename, node_metric=None,
+def add_metric_plot(roams, boss, metric_name, node_metric=None,
                     graph_metric=None):
     node_metric_ranking = partial(
         metric_ranking_graph_list,
@@ -104,13 +104,14 @@ def add_metric_plot(roams, boss, filename, node_metric=None,
     )
 
     plt.figure()
+    plt.title(metric_name)
     plt.plot(node_metric_ranking(roams[0]), label='roam1')
     plt.plot(node_metric_ranking(roams[1]), label='roam2')
     plt.plot(node_metric_ranking(roams[2]), label='roam3')
     plt.plot(node_metric_ranking(roams[3]), label='roam4')
 
     plt.legend()
-    plt.savefig(filename)
+    plt.savefig(metric_name + '.pdf')
 
 
 def generate_metric_plots(graph, boss):
@@ -121,10 +122,10 @@ def generate_metric_plots(graph, boss):
     closeness = lambda v: v.closeness()
     eigenvector = lambda g: g.evcent()
 
-    add_metric_plot(roams, boss, 'degree.pdf', node_metric=degree)
-    add_metric_plot(roams, boss, 'betweenness.pdf', node_metric=betweenness)
-    add_metric_plot(roams, boss, 'closeness.pdf', node_metric=closeness)
-    add_metric_plot(roams, boss, 'eigenvector.pdf', graph_metric=eigenvector)
+    add_metric_plot(roams, boss, 'degree', node_metric=degree)
+    add_metric_plot(roams, boss, 'betweenness', node_metric=betweenness)
+    add_metric_plot(roams, boss, 'closeness', node_metric=closeness)
+    add_metric_plot(roams, boss, 'eigenvector', graph_metric=eigenvector)
 
 
 graph = random_graph()
