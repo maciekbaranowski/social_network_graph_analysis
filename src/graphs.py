@@ -127,9 +127,8 @@ def generate_metric_plots(graph, boss):
     add_metric_plot(roams, boss, 'closeness', node_metric=closeness)
     add_metric_plot(roams, boss, 'eigenvector', graph_metric=eigenvector)
 
-
 graph = random_graph()
 boss = find_the_boss(graph)
 generate_metric_plots(graph, boss)
-print(independent_cascade(graph, boss))
-print(linear_threshold(graph, boss))
+independent_cascade(graph, boss)
+linear_threshold(graph, boss)
